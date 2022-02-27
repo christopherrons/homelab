@@ -1,0 +1,12 @@
+- name: Update and upgrade ubuntu hosts
+  hosts: ubuntu
+  become: yes
+  vars_files:
+    - "../inventory/vars/default_vars.yml"
+    - "../inventory/vars/{{ hostvars[inventory_hostname]['group_var_dir'] }}/{{ hostvars[inventory_hostname]['group_var_dir'] }}_default_vars.yml"
+    - "../inventory/vars/{{ hostvars[inventory_hostname]['group_var_dir'] }}/{{ inventory_hostname }}_vars.yml"
+  tasks:
+    - name: update and upgrade host
+      apt:
+        update-cache: yes
+        upgrade: "yes"

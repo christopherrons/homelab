@@ -1,0 +1,13 @@
+- name: Set authorized key taken from file
+  hosts: ubuntu
+  become: yes
+  vars_files:
+    - "../inventory/vars/default_vars.yml"
+    - "../inventory/vars/{{ hostvars[inventory_hostname]['group_var_dir'] }}/{{ hostvars[inventory_hostname]['group_var_dir'] }}_default_vars.yml"
+    - "../inventory/vars/{{ hostvars[inventory_hostname]['group_var_dir'] }}/{{ inventory_hostname }}_vars.yml"
+  tasks:
+    - name: add key to host
+      ansible.posix.authorized_key:
+        user: christopher
+        state: present
+        key: "{{ lookup('file', '~/.ssh/id_rsa.pub') }}"
