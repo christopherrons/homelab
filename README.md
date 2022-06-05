@@ -22,6 +22,8 @@ instructions for setting up the homelab.
 ## Ansible
 
 Ansible is used to add the ssh key and verify that it exist on the host.
+The [run-host-setup-playbook.sh](scripts/lxc-enviroment/run-host-setup-playbook.sh) can be used to add keys and update
+multiple hosts.
 
 ## Setting up LXC
 
