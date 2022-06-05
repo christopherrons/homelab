@@ -6,7 +6,7 @@ source ../setenv.sh
 # Tutorial for agents: https://www.youtube.com/watch?v=V2ejGOY_uJI&t=175s
 
 if [[ ${1+x} ]]; then
-  HOST_MASTER="$1"
+  HOST="$1"
 else
   echo "Failed... Hostname required!"
   exit 1

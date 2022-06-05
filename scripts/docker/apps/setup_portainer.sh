@@ -1,7 +1,7 @@
 #!/bin/bash
 # exit when any command fails
 set -e
-source ../setenv.sh
+source ../../setenv.sh
 
 if [[ ${1+x} ]]; then
   HOST="$1"

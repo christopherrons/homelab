@@ -3,9 +3,13 @@ network:
   ethernets:
     enp2s0:
       dhcp4: false
-      dhcp6: false
   bridges:
     br0:
       interfaces: [ enp2s0 ]
-      dhcp4: true
+      dhcp4: false
+      addresses: [<static_ip>/<mask>]
+      gateway4: <router_ip>
+      nameservers:
+        addresses: [<dns_ip>]
   version: 2
+

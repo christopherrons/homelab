@@ -19,7 +19,7 @@ fi
 
 echo "Start agent on $HOST_AGENT"
 rsync -r -P /home/christopher/Downloads/agent.jar "$ROOT_USER"@"$HOST_AGENT":
-ssh "$ROOT_USER"@"$HOST_AGENT" "$START_COMMAND &>/dev/null"
+ssh "$ROOT_USER"@"$HOST_AGENT" "java -jar agent.jar $START_COMMAND"
 
 
 
