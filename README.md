@@ -1,61 +1,72 @@
 # Homelab Setup
 
-Scripts and instructions for setting up mt homelab.
+The homelab is run on a small asus machine running ubuntu server. On the server lxc is used to create linux containers
+which are used for deploying projects and setting up various tools relevant to DevOps. In this readme you will find
+instructions for setting up the homelab.
 
 ## Services
 
-* `Proxmox`
-    * Used for creating Linux Containers
-* `Portainer`
-    * Used for deploying docker containers
 * `Docker`
     * Used for running applications in a container
+* `Portainer`
+    * Used for deploying docker containers
 * `Jenkins`
-    * Used for Ci/Cd
+    * Used for CI/CD
 * `Homer`
     * Used as a dashboard for the homelab
+* `Pi-Hole`
+    * Used as a DNS and add blocker
+* `Nginx`
+    * Routing
 
-## Proxmox Setup
+## Ansible
 
-1. Download [Proxmox](https://proxmox.com/en/).
-2. Flash it to a USB drive using e.g. [Etcher](https://www.balena.io/etcher/).
-3. Insert drive and install.
-    1. [Guide to install Proxmox](https://www.youtube.com/watch?v=7OVaWaqO2aU&t=95s).
-4. Create some LXC.
-    1. [Guide to create LXC](https://www.youtube.com/watch?v=cyjXxsQ8Igw).
-    2. Allow root ssh by going to `/etc/ssh/sshd_config` and setting `PasswordRootLoging yes`.
+Ansible is used to add the ssh key and verify that it exist on the host.
 
-## Docker Setup
+## Setting up LXC
 
-### Requirements
+Start by creating a bridge interface on the host machine, this will allow the LXC to get there ip from the router
+enabling access from the local network. The interface should be added to `/etc/netplan/xx.yml` using the config
+in [netplan.yml](resources/misc/netplan.yml) and once added run `sudo netplan apply`. Then run `lxd init` and when
+prompted about creating a new bridge select no and instead add the bridge
+specified in [netplan.yml](resources/misc/netplan.yml).
 
-* SSH public key located on LXC.
-* The LXC had to be unprivileged and keycl set to true.
+### Creating an LXC
 
-### Installation
+LXC are set up by adding their name to the [setenv.sh](scripts/setenv.sh)
+, [setup_all_lxc.sh](scripts/lxc-enviroment/setup_all_lxc.sh) and then
+running [setup_all_lxc.sh](scripts/lxc-enviroment/setup_all_lxc.sh)
+or [setup_lxc.sh](scripts/lxc-enviroment/setup_lxc.sh). The script will build an ubuntu-21.04 LXC and add the local
+computers ssh-key to the root and lxc-user specified in [setenv.sh](scripts/setenv.sh).
 
-Run the script [setup_docker_ubuntu.sh](scripts/lxc-enviroment/setup_docker_ubuntu-lxc.sh). For reference se the
-official [documentation](https://docs.docker.com/engine/install/ubuntu/).
+## Setup Docker on lxc
 
-## Portainer Setup
+Build an lxc and simple run the [setup_all_lxc.sh](scripts/docker/setup_docker_ubuntu-lxc.sh) on the specified
+lxc. The script will install docker add the user to the docker group. It will also set the lxc to allow nesting.
 
-### Requirements
+## Setup Portainer on Docker
 
-* SSH public key located on LXC.
-* Docker has to be installed.
+Run the [setup_all_lxc.sh](scripts/docker/apps/setup_portainer.sh) on the specified
+lxc, which will install Portainer.
 
-### Installation
+## Setup Homer on Docker
 
-Run the script [setup_portainer.sh](scripts/docker-apps/setup_portainer.sh).
+Run the [setup_all_lxc.sh](scripts/docker/apps/setup_homer.sh) on the specified
+lxc, which install Homer. Then edit the [config.yml](resources/homer-dashboard/config.yml) and the
+run [update_homer.sh](scripts/docker/apps/update_homer.sh).
 
-## Homer-Dashboard Setup
+## Setup Nginx on Docker
 
-### Requirements
+Run the [setup_nginx.sh](scripts/docker/apps/setup_nginx.sh) on the specified
+lxc, which will install Nginx.
 
-* Docker has to be installed.
+## Setup Jenkins
 
-# Installation
+Create a jenkins master lxc and then run [setup_jenkins-master.sh](scripts/jenkins/setup_jenkins-master.sh). The
+remaining jenkins master setup requires som manual work.
 
-Run the script [setup_homer.sh](scripts/docker/apps/setup_homer.sh) or use portainer, see
-this [youtube guide](https://www.youtube.com/watch?v=9iTPm45EmxM). Official
-repo [Git](https://github.com/bastienwirtz/homer).
+### Setup and Startup Agent
+
+Use the [setup_jenkins_agent.sh](scripts/jenkins/setup_jenkins_agent.sh) to create the agent. The agent can then be
+started using the command given in the GUI as input to the [start_agent.sh](scripts/jenkins/start_agent.sh) script
+(see [tutorial](https://www.youtube.com/watch?v=V2ejGOY_uJI&t=175s)).
