@@ -10,4 +10,6 @@ else
   exit 1
 fi
 
-ssh "$LXC_USER"@"$HOST" 'curl -sSL https://install.pi-hole.net | bash'
+ssh -tt "$LXC_USER"@"$HOST" 'sudo curl -sSL https://install.pi-hole.net | bash'
+ssh -tt "$LXC_USER"@"$HOST" 'pihole -a -p'
+

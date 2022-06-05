@@ -1,8 +1,15 @@
 #!/bin/bash
 # Utility script that runs multiple setup scripts.
-source ../setenv.sh
+set -e
+source setenv.sh
 
-bash /lxc-enviroment/setup_all_lxc.sh "$HOMELAB_SERVER"
-bash /lxc-enviroment/setup_docker_ubuntu-lxc.sh "$HOMELAB_SERVER" "$DOCKER_LXC"
-bash /dev-portal/setup_homer.sh "$DOCKER_LXC"
-bash /docker-apps/setup_portainer.sh "$DOCKER_LXC"
+cd lxc-enviroment && bash setup_all_lxc.sh "$HOMELAB_SERVER" && cd -
+cd docker && bash setup_docker_ubuntu-lxc.sh "$HOMELAB_SERVER" "$DOCKER_LXC" && cd -
+cd docker/apps && bash setup_homer.sh "$DOCKER_LXC" && cd -
+cd docker/apps && bash update_homer.sh "$DOCKER_LXC" && cd -
+cd docker/apps && bash setup_portainer.sh "$DOCKER_LXC" && cd -
+cd misc && bash setup_pi-hole.sh "$MISC_LXC" && cd -
+cd jenkins && bash setup_jenkins-master.sh "$JENKINS_MASTER_LXC" && cd -
+cd jenkins && bash setup_jenkins-agent.sh "$JENKINS_AGENT_1_LXC" && cd -
+
+

@@ -64,4 +64,4 @@ echo "Done testing docker!"
 
 echo "Add user $LXC_USER to docker on host $LXC!"
 DOCKER_GROUP_COMMAND="sudo usermod -aG docker $LXC_USER"
-run_ssh "$LXC" "$LXC_USER" "$DOCKER_GROUP_COMMAND"
+run_ssh "$LXC" "$ROOT_USER" "$DOCKER_GROUP_COMMAND"

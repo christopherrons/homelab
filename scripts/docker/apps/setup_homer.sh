@@ -1,7 +1,7 @@
 #!/bin/bash
 # Utility script that install homer dashboard in a docker container.
 set -e
-source ../setenv.sh
+source ../../setenv.sh
 
 if [[ ${1+x} ]]; then
   HOST="$1"
@@ -15,6 +15,10 @@ function run_ssh() {
   ssh -tt "$LXC_USER"@"$HOST" "$command"
 }
 
+echo "Checking if docker is installed!"
+IS_DOCKER_INSTALLED_COMMAND="docker ps"
+run_ssh "$IS_DOCKER_INSTALLED_COMMAND"
+
 CONFIG_DIR="/home/$LXC_USER/dev-portal"
 
 echo "Create config dir."
@@ -26,7 +30,7 @@ host_uid=$(run_ssh "id --user")
 host_user_name=$(run_ssh "id --user --name")
 host_gid=$(run_ssh "id --group")
 host_group_name=$(run_ssh "id --group --name")
-INSTALL_DEPENDENCIES="docker run -d \
+INSTALL_HOMER="docker run -d \
                         --publish 8082:8080 \
                         --name homer-dashboard \
                         --env UID=$host_uid \
@@ -36,4 +40,4 @@ INSTALL_DEPENDENCIES="docker run -d \
                         --mount type=bind,source=$CONFIG_DIR,target=/www/assets \
                         --restart=always \
                         b4bz/homer:latest"
-run_ssh "$INSTALL_DEPENDENCIES"
+run_ssh "$INSTALL_HOMER"

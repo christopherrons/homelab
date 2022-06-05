@@ -56,6 +56,6 @@ Run the script [setup_portainer.sh](scripts/docker-apps/setup_portainer.sh).
 
 # Installation
 
-Run the script [setup_homer.sh](scripts/dev-portal/setup_homer.sh) or use portainer, see
+Run the script [setup_homer.sh](scripts/docker/apps/setup_homer.sh) or use portainer, see
 this [youtube guide](https://www.youtube.com/watch?v=9iTPm45EmxM). Official
 repo [Git](https://github.com/bastienwirtz/homer).

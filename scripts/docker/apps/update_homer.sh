@@ -1,7 +1,7 @@
 #!/bin/bash
 # Utility script that updates the homer dashboard config
 set -e
-#source setup_homer.sh
+source ../../setenv.sh
 
 if [[ ${1+x} ]]; then
   HOST="$1"
@@ -11,12 +11,12 @@ else
 fi
 
 
+CONFIG_DIR="/home/$LXC_USER/dev-portal"
 echo "Remove old file..."
-REMOVE_CONFIG="cd /home/homelab && \
-                rm config.yml"
+REMOVE_CONFIG="cd $CONFIG_DIR && rm config.yml"
 ssh -tt root@"$HOST" "$REMOVE_CONFIG"
 
 echo "Updating file..."
-CONFIG_DIR="/home/homelab"
-rsync -r -p ../resources/homer-dashboard/config.yml root@"$HOST":"$CONFIG_DIR"
+
+rsync -r -p ../../../resources/homer-dashboard/config.yml "$LXC_USER"@"$HOST":"$CONFIG_DIR"
 echo "Done!"
