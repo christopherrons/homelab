@@ -1,5 +1,5 @@
 #!/bin/bash
-# exit when any command fails
+# Utility script that updates the homer dashboard config
 set -e
 #source setup_homer.sh
 

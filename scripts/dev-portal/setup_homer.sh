@@ -1,6 +1,8 @@
 #!/bin/bash
-# exit when any command fails
+# Utility script that install homer dashboard in a docker container.
 set -e
+source ../setenv.sh
+
 if [[ ${1+x} ]]; then
   HOST="$1"
 else
@@ -8,17 +10,22 @@ else
   exit 1
 fi
 
-CONFIG_DIR="/home/homelab"
+function run_ssh() {
+  command="$1"
+  ssh -tt "$LXC_USER"@"$HOST" "$command"
+}
 
-echo "Create Folder configs"
+CONFIG_DIR="/home/$LXC_USER/dev-portal"
+
+echo "Create config dir."
 CREATE_DIR="mkdir -p $CONFIG_DIR"
-ssh -tt root@"$HOST" "$CREATE_DIR"
+run_ssh "$CREATE_DIR"
 
 echo "Creating homer-dashboard docker image"
-host_uid=$(ssh -tt root@"$HOST" "id --user")
-host_user_name=$(ssh -tt root@"$HOST" "id --user --name")
-host_gid=$(ssh -tt root@"$HOST" "id --group")
-host_group_name=$(ssh -tt root@"$HOST" "id --group --name")
+host_uid=$(run_ssh "id --user")
+host_user_name=$(run_ssh "id --user --name")
+host_gid=$(run_ssh "id --group")
+host_group_name=$(run_ssh "id --group --name")
 INSTALL_DEPENDENCIES="docker run -d \
                         --publish 8082:8080 \
                         --name homer-dashboard \
@@ -29,4 +36,4 @@ INSTALL_DEPENDENCIES="docker run -d \
                         --mount type=bind,source=$CONFIG_DIR,target=/www/assets \
                         --restart=always \
                         b4bz/homer:latest"
-ssh -tt root@"$HOST" "$INSTALL_DEPENDENCIES"
+run_ssh "$INSTALL_DEPENDENCIES"

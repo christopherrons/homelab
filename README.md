@@ -34,7 +34,7 @@ Scripts and instructions for setting up mt homelab.
 
 ### Installation
 
-Run the script [setup_docker_ubuntu.sh](scripts/setup_docker_ubuntu.sh). For reference se the
+Run the script [setup_docker_ubuntu.sh](scripts/lxc-enviroment/setup_docker_ubuntu-lxc.sh). For reference se the
 official [documentation](https://docs.docker.com/engine/install/ubuntu/).
 
 ## Portainer Setup
@@ -46,7 +46,7 @@ official [documentation](https://docs.docker.com/engine/install/ubuntu/).
 
 ### Installation
 
-Run the script [setup_portainer.sh](scripts/setup_portainer.sh).
+Run the script [setup_portainer.sh](scripts/docker-apps/setup_portainer.sh).
 
 ## Homer-Dashboard Setup
 
@@ -56,6 +56,6 @@ Run the script [setup_portainer.sh](scripts/setup_portainer.sh).
 
 # Installation
 
-Run the script [setup_homer.sh](scripts/setup_homer.sh) or use portainer, see
+Run the script [setup_homer.sh](scripts/dev-portal/setup_homer.sh) or use portainer, see
 this [youtube guide](https://www.youtube.com/watch?v=9iTPm45EmxM). Official
 repo [Git](https://github.com/bastienwirtz/homer).

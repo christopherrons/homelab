@@ -1,1 +1,0 @@
-ansible-playbook ../ansible/playbooks/host-setup.yml --verbose -i ../ansible/inventory/hosts.yml

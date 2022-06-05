@@ -8,6 +8,6 @@
   tasks:
     - name: add key to host
       ansible.posix.authorized_key:
-        user: christopher
+        user: herron
         state: present
         key: "{{ lookup('file', '~/.ssh/id_rsa.pub') }}"

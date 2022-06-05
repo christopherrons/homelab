@@ -1,6 +1,7 @@
 #!/bin/bash
 # exit when any command fails
 set -e
+source ../setenv.sh
 
 if [[ ${1+x} ]]; then
   HOST="$1"
@@ -9,9 +10,14 @@ else
   exit 1
 fi
 
+function run_ssh() {
+  command="$1"
+  ssh -tt "$ROOT_USER"@"$HOST"  "$command"
+}
+
 echo "Checking if docker is installed!"
 IS_DOCKER_INSTALLED_COMMAND="docker ps"
-ssh -tt root@"$HOST" "$IS_DOCKER_INSTALLED_COMMAND"
+run_ssh "$IS_DOCKER_INSTALLED_COMMAND"
 
 echo "Installing Portainer with docker"
 INSTALL_PORTAINER_COMMAND="docker run -d \
@@ -22,4 +28,4 @@ INSTALL_PORTAINER_COMMAND="docker run -d \
                            -v /var/run/docker.sock:/var/run/docker.sock \
                            -v portainer_data:/data \
                            portainer/portainer-ce:latest"
-ssh -tt root@"$HOST" "$INSTALL_PORTAINER_COMMAND"
+run_ssh "$INSTALL_PORTAINER_COMMAND"
