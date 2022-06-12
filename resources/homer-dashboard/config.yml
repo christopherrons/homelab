@@ -62,4 +62,12 @@ services:
         subtitle: "CI/CD Pipeline"
         tag: "jenkins"
         url: "http://jenkins-master.int.herron.se:8080/"
+  - name: "Applications"
+    icon: "fas fa-project-diagram"
+    items:
+      - name: "Financial Services Api Docs"
+        icon: "far fa-file-code"
+        subtitle: "Rest Api Documentation"
+        tag: "swagger"
+        url: "http://financial-services-1:8080/swagger-ui/index.html"
 
