@@ -1,5 +1,5 @@
 - name: Run add authorized keys playbook
-  import_playbook: authorized_keys.yml
+  import_playbook: add_authorized_keys.yml
 
 - name: Run update and upgrade playbook
   import_playbook: update-hosts.yml

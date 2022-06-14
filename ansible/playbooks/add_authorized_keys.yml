@@ -1,0 +1,14 @@
+- name: Set authorized key on machine
+  hosts: lxc
+  become: yes
+  remote_user: root
+  tasks:
+    - name: add key to host
+      ansible.posix.authorized_key:
+        user: herron
+        state: present
+        key: "{{ item }}"
+      ansible.builtin.debug:
+        msg:"{{ item }}"
+      with_fileglob:
+        - "tmp/*"
