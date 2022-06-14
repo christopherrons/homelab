@@ -19,6 +19,9 @@
       with_items:
         - 'export JAVA_HOME=/opt/jdk-17.0.1+12'
         - 'export PATH=$PATH:$JAVA_HOME/bin'
-    - name: Remove download and source bashrc
+    - name: Source bashrc
       command: "source /home/herron/.bashrc && rm -rf /home/herron/OpenJDK17U-jdk_x64_linux_hotspot_17.0.1_12.tar.gz"
+    - name: Delete tar file
+      command: "rf /home/herron/OpenJDK17U-jdk_x64_linux_hotspot_17.0.1_12.tar.gz"
+
 
