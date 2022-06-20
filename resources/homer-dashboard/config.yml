@@ -62,6 +62,11 @@ services:
         subtitle: "CI/CD Pipeline"
         tag: "jenkins"
         url: "http://jenkins-master.int.herron.se:8080/"
+      - name: "ByteSafe"
+        icon: "fas fa-archive"
+        subtitle: "Artifactory and Package Security"
+        tag: "artifactory"
+        url: "https://herron.bytesafe.dev/workspace"
   - name: "Applications"
     icon: "fas fa-project-diagram"
     items:
