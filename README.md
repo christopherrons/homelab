@@ -1,6 +1,6 @@
 # Homelab Setup
 
-The homelab is run on a small Asus machine running ubuntu server. On the server lxc is used to create linux containers
+The homelab is run on a Asus machine running ubuntu server. On the server lxd is used to create linux containers
 which are used for deploying projects and setting up various tools relevant to DevOps. In this readme you will find
 instructions for setting up the homelab.
 
@@ -18,6 +18,8 @@ instructions for setting up the homelab.
     * Used as a DNS and add blocker
 * `Nginx`
     * Routing
+* `ByteSafe`
+    * Artifactory and package security
 
 ## Ansible
 
@@ -60,10 +62,10 @@ run [update_homer.sh](scripts/docker/apps/update_homer.sh).
 
 Run the [setup_nginx.sh](scripts/docker/apps/setup_nginx.sh) to will install Nginx.
 
-## Setup Pihole 
+## Setup Pihole
 
 Run the [setup_pi-hole.sh](scripts/misc/setup_pi-hole.sh) to install pi-hole and create DNS for all lxc.
-Set the domain on the router the same as in [setenv.sh](scripts/setenv.sh). 
+Set the domain on the router the same as in [setenv.sh](scripts/setenv.sh).
 
 ## Setup Jenkins
 
@@ -75,3 +77,8 @@ remaining jenkins master setup requires som manual work.
 Use the [setup_jenkins_agent.sh](scripts/jenkins/setup_jenkins-agent.sh) to create the agent. The agent can then be
 started using the command given in the GUI as input to the [start_agent.sh](scripts/jenkins/start_agent.sh) script
 (see [tutorial](https://www.youtube.com/watch?v=V2ejGOY_uJI&t=175s)).
+
+## Setup ByteSafe
+
+[Bytesafe](https://bytesafe.dev/) is a free to use cloud artifactory which also checks for security breaches in used
+packages. Setup is done by following the tutorials on the page.

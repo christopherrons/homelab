@@ -7,8 +7,6 @@
       ansible.posix.authorized_key:
         user: herron
         state: present
-        key: "{{ item }}"
-      ansible.builtin.debug:
-        msg:"{{ item }}"
-      with_fileglob:
-        - "tmp/*"
+        key: "{{ item.src }}"
+      with_community.general.filetree: "tmp/"
+      when: item.state == 'file'
