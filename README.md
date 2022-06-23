@@ -60,7 +60,9 @@ run [update_homer.sh](scripts/docker/apps/update_homer.sh).
 
 ## Setup Nginx in Docker
 
-Run the [setup_nginx.sh](scripts/docker/apps/setup_nginx.sh) to will install Nginx.
+Run the [setup_nginx.sh](scripts/docker/apps/setup_nginx.sh) to will install Nginx. Add
+the [conf files](resources/nginx) to `/etc/ngix/conf.d`. Recommended is to create a sites-enabled and sites-available
+folder where the former simply symlinks to the latter. Then alter the include variable in `/etc/ngix/nginx.conf`.
 
 ## Setup Pihole
 

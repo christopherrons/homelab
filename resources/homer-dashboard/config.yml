@@ -51,7 +51,7 @@ services:
         icon: "fab fa-docker"
         subtitle: "Docker Administration"
         tag: "docker"
-        url: "http://portainer.int.herron.se:9000/"
+        url: "http://portainer.int.herron.se"
       - name: "Pi-Hole"
         icon: "fab fa-raspberry-pi"
         subtitle: "Add Block and DNS"

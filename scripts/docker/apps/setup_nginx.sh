@@ -1,7 +1,7 @@
 #!/bin/bash
 # exit when any command fails
 set -e
-source ../setenv.sh
+source ../../setenv.sh
 
 if [[ ${1+x} ]]; then
   HOST="$1"
@@ -23,7 +23,7 @@ echo "Installing Portainer with docker"
 INSTALL_NGINX_COMMAND="docker run -d \
                            --name=nginx \
                            --restart always \
-                           -p 8085:80 \
+                           -p 80:80 \
                            -v /var/run/docker.sock:/var/run/docker.sock \
                            -v nginx_data:/data \
                            nginx:latest"
