@@ -75,4 +75,12 @@ services:
         subtitle: "Rest Api Documentation"
         tag: "swagger"
         url: "http://financial-services-1:8080/swagger-ui/index.html"
+  - name: "Monitoring"
+    icon: "fab fa-watchman-monitoring"
+    items:
+      - name: "Grafana"
+        icon: "fas fa-assistive-listening-systems"
+        subtitle: "Log and System Monitoring"
+        tag: "monitoring"
+        url: "http://grafana.int.herron.se"
 

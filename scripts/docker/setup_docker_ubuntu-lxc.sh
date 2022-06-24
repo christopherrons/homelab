@@ -79,3 +79,11 @@ echo "Done testing docker!"
 echo "Add user $LXC_USER to docker on host $LXC_NAME!"
 DOCKER_GROUP_COMMAND="sudo usermod -aG docker $LXC_USER"
 run_ssh "$LXC_IP" "$ROOT_USER" "$DOCKER_GROUP_COMMAND"
+
+echo "Create volume dir on host $LXC_NAME!"
+DOCKER_VOLUME_DIR_COMMAND="mkdir docker-volumes"
+run_ssh "$LXC_IP" "$LXC_USER" "$DOCKER_VOLUME_DIR_COMMAND"
+
+echo "Create volume dir on host $LXC_NAME!"
+DOCKER_COMPOSE_INSTALL_COMMAND="sudo apt install docker-compose"
+run_ssh "$LXC_IP" "$ROOT_USER" "$DOCKER_COMPOSE_INSTALL_COMMAND"

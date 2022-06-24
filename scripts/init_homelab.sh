@@ -9,6 +9,8 @@ cd "$CURRENT_DIR"/docker && bash setup_docker_ubuntu-lxc.sh "$HOMELAB_SERVER_NAM
 cd "$CURRENT_DIR"/docker/apps && bash setup_homer.sh "$DOCKER_LXC_IP" && cd "$CURRENT_DIR"
 cd "$CURRENT_DIR"/docker/apps && bash update_homer.sh "$DOCKER_LXC_IP" && cd "$CURRENT_DIR"
 cd "$CURRENT_DIR"/docker/apps && bash setup_portainer.sh "$DOCKER_LXC_IP" && cd "$CURRENT_DIR"
+cd "$CURRENT_DIR"/docker/apps && bash setup_nginx.sh "$DOCKER_LXC_IP" && cd "$CURRENT_DIR"
+cd "$CURRENT_DIR"/docker/apps && bash setup_monitoring.sh "$DOCKER_LXC_IP" && cd "$CURRENT_DIR"
 cd "$CURRENT_DIR"/misc && bash setup_pi-hole.sh "$MISC_LXC_IP" && cd "$CURRENT_DIR"
 cd "$CURRENT_DIR"/jenkins && bash setup_jenkins-master.sh "$JENKINS_MASTER_LXC_IP" && cd "$CURRENT_DIR"
 cd "$CURRENT_DIR"/jenkins && bash setup_jenkins-agent.sh "$JENKINS_AGENT_1_LXC_IP" && cd "$CURRENT_DIR"
