@@ -6,7 +6,7 @@ positions:
   filename: /tmp/positions.yml
 
 clients:
-  - url: http://loki.int.herron.se/loki/api/v1/push
+  - url: http://docker.int.herron.se:3100/loki/api/v1/push
 
 # Local Machine Logs
 scrape_configs:
