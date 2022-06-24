@@ -15,21 +15,19 @@ function run_ssh() {
   ssh -tt "$LXC_USER"@"$HOST" "$command"
 }
 
+echo "Install docker compose on host $HOST!"
+run_ssh "sudo apt install docker-compose"
+
 BASE_PATH="/home/$LXC_USER/docker-volumes"
 PROMTAIL_PATH="$BASE_PATH"/promtail
-LOKI_PATH="$BASE_PATH"/loki
-GRAFANA_PATH="$BASE_PATH"/grafana
 echo "On host $HOST, create monitoring dirs!"
-run_ssh "mkdir -p $PROMTAIL_PATH && mkdir -p $LOKI_PATH && mkdir -p $GRAFANA_PATH"
+run_ssh "mkdir -p monitoring && mkdir -p $PROMTAIL_PATH"
 
 echo "On host $HOST, add docker compose file!"
-scp ../../../resources/monitoring/docker-compose.yml "$LXC_USER"@"$HOST":"$BASE_PATH"
-
-echo "On host $HOST, add loki config file!"
-scp ../../../resources/monitoring/loki-config.yml "$LXC_USER"@"$HOST":"$LOKI_PATH"
+scp ../../../resources/monitoring/promtail-agent/docker-compose.yml "$LXC_USER"@"$HOST":"$BASE_PATH"
 
 echo "On host $HOST, add promtail config file!"
-scp ../../../resources/monitoring/promtail-config.yml "$LXC_USER"@"$HOST":"$PROMTAIL_PATH"
+scp ../../../resources/monitoring/promtail-agent/promtail-config.yml "$LXC_USER"@"$HOST":"$PROMTAIL_PATH"
 
 echo "On host $HOST, start monitoring!"
 run_ssh "cd $BASE_PATH && docker-compose up -d --force-recreate"

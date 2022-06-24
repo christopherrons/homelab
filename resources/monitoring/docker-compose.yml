@@ -1,6 +1,4 @@
 version: "3"
-networks:
-  loki:
 services:
     loki:
       image: grafana/loki:2.4.0
@@ -10,8 +8,6 @@ services:
         - "3100:3100"
       restart: unless-stopped
       command: -config.file=/etc/loki/loki-config.yml
-      networks:
-        - loki
     promtail:
       image: grafana/promtail:2.4.0
       volumes:
@@ -19,8 +15,6 @@ services:
         - /home/herron/docker-volumes/promtail:/etc/promtail
       restart: unless-stopped
       command: -config.file=/etc/promtail/promtail-config.yml
-      networks:
-        - loki
     grafana:
       image: grafana/grafana:latest
       user: "1000"
@@ -29,5 +23,3 @@ services:
       ports:
         - "3000:3000"
       restart: unless-stopped
-      networks:
-        - loki

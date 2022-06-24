@@ -40,7 +40,7 @@ function run_ssh() {
 }
 
 echo "Set lxc nesting to true on host $HOST_NAME!"
-NESTING_COMMAND="lxc config set docker security.nesting true"
+NESTING_COMMAND="lxc config set $LXC_NAME security.nesting true"
 run_ssh "$HOST_IP" "$LXC_USER" "$NESTING_COMMAND"
 
 echo "Started setting up docker repository on host $LXC_NAME!"
@@ -81,9 +81,9 @@ DOCKER_GROUP_COMMAND="sudo usermod -aG docker $LXC_USER"
 run_ssh "$LXC_IP" "$ROOT_USER" "$DOCKER_GROUP_COMMAND"
 
 echo "Create volume dir on host $LXC_NAME!"
-DOCKER_VOLUME_DIR_COMMAND="mkdir docker-volumes"
+DOCKER_VOLUME_DIR_COMMAND="mkdir -p docker-volumes"
 run_ssh "$LXC_IP" "$LXC_USER" "$DOCKER_VOLUME_DIR_COMMAND"
 
-echo "Create volume dir on host $LXC_NAME!"
+echo "Install docker compose on host $LXC_NAME!"
 DOCKER_COMPOSE_INSTALL_COMMAND="sudo apt install docker-compose"
 run_ssh "$LXC_IP" "$ROOT_USER" "$DOCKER_COMPOSE_INSTALL_COMMAND"

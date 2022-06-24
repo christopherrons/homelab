@@ -19,3 +19,6 @@ fi
 
 SOURCE_KEY="$(ssh -o StrictHostKeyChecking=no -tt "$ROOT_USER"@"$SOURCE_HOST" "cat ~/.ssh/id_rsa.pub")"
 ssh -o StrictHostKeyChecking=no -tt "$LXC_USER"@"$DESTINAION_HOST" "echo $SOURCE_KEY >> ~/.ssh/authorized_keys"
+
+SOURCE_KEY="$(ssh -o StrictHostKeyChecking=no -tt "$LXC_USER"@"$SOURCE_HOST" "cat ~/.ssh/id_rsa.pub")"
+ssh -o StrictHostKeyChecking=no -tt "$LXC_USER"@"$DESTINAION_HOST" "echo $SOURCE_KEY >> ~/.ssh/authorized_keys"

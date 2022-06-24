@@ -94,4 +94,5 @@ packages. Setup is done by following the tutorials on the page.
 ## Setup Monitoring
 
 System and log monitoring is done using Loki, Promtail and Grafana. The docker containers can be setup
-using [setup_monitoring.sh](scripts/docker/apps/setup_monitoring.sh). 
+using [setup_monitoring.sh](scripts/docker/apps/setup_monitoring.sh). Create a promtail agent on another host
+using [setup_monitoring_agent.sh](scripts/docker/apps/setup_monitoring_agent.sh).
