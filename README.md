@@ -20,6 +20,12 @@ instructions for setting up the homelab.
     * Routing
 * `ByteSafe`
     * Artifactory and package security
+* `Loki`
+    * Read, parse and index log files
+* `Promtail`
+    * Used to read and push logs to a loki server
+* `Grafana`
+    * Used to visualise log and system monitoring
 
 ## Ansible
 
@@ -84,3 +90,8 @@ started using the command given in the GUI as input to the [start_agent.sh](scri
 
 [Bytesafe](https://bytesafe.dev/) is a free to use cloud artifactory which also checks for security breaches in used
 packages. Setup is done by following the tutorials on the page.
+
+## Setup Monitoring
+
+System and log monitoring is done using Loki, Promtail and Grafana. The docker containers can be setup
+using [setup_monitoring.sh](scripts/docker/apps/setup_monitoring.sh). 
